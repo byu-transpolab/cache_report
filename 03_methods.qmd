@@ -1,0 +1,51 @@
+# Methodology
+
+```{r setup, file = "R/chapter_start.R", include = FALSE}
+# a number of commands need to run at the beginning of each chapter. This
+# includes loading libraries that I always use, as well as options for 
+# displaying numbers and text.
+```
+
+```{r setup2, include = FALSE}
+# Other packages ------
+# These are packages that get used in this chapter but aren't part of the default set.
+library(mlogit)
+```
+
+In this chapter, you describe the approach you have taken on the problem. This usually involves a discussion about both the data you used and the models you applied.
+
+## Data
+
+Discuss where you got your data, how you cleaned it, and any assumptions you made. In this example, we get the `Car` dataset from the `mlogit` [@mlogit] package[^03_methods-1] and massage it to be in the format needed for `mlogit`.
+
+[^03_methods-1]: You can often get a well-formatted citation for an R package by typing `citation(package = "packagename")` in the console.
+
+```{r load_data}
+tar_load(car_mlogit)
+```
+
+Often there will be a table describing summary statistics of your dataset. @tbl-summary shows a nice table using the [`datasummary`](https://vincentarelbundock.github.io/modelsummary/articles/datasummary.html) functions in the `modelsummary` package [@modelsummary].
+
+```{r datasummary}
+#| label: tbl-summary
+#| tbl-cap: Descriptive Statistics of Dataset
+datasummary_balance(
+  ~type, 
+  data = car_mlogit %>% 
+    select(type, fuel, price, range, size), 
+  dinm = FALSE
+) %>%
+  kableExtra::kable_styling(latex_options="scale_down")
+```
+
+## Models
+
+If your work is mostly a new model, you probably will have introduced some details in the literature review. But this is where you describe the mathematical construction of your model, the variables it uses, and other things. Some methods are so common (linear regression) that it is unnecessary to explore them in detail. But others will need to be described, often with mathematics. For example, the probability of an alternative $i$ in the a multinomial logit model is
+
+$$
+P_i(X_{in}) = \frac{e^{X_{in}\beta_i}}{\sum_{j \in J}e^{X_{jn}\beta_j}}
+$$ {#eq-mnl}
+
+Use [LaTeX mathematics](https://www.overleaf.com/learn/latex/mathematical_expressions). You'll want to number display equations so that you can refer to them later in the manuscript. Other simpler math can be described inline, like saying that $i, j \in J$. Details on using equations in Quarto are available [here](https://quarto.org/docs/visual-editor/technical.html#equations).
+
+You can also refer back to numbered equations, like the probability of an MNL presented in @eq-mnl.

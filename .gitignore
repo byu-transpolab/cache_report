@@ -1,0 +1,16 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+/.quarto/
+/_book/
+/_site/
+/_targets/
+elsarticle-num.bst
+elsarticle.cls
+index.spl
+A-Template-Quarto-Repository.tex
+elsarticle-harv.bst
+*_cache/
+*-tikzDictionary
+*_files/

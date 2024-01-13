@@ -1,0 +1,51 @@
+## Applications
+
+```{r setup, file = "R/chapter_start.R", include = FALSE}
+# a number of commands need to run at the beginning of each chapter. This
+# includes loading libraries that I always use, as well as options for 
+# displaying numbers and text.
+```
+
+```{r setup2, include = FALSE}
+# Other packages ------
+# These are packages that get used in this chapter but aren't part of the default set.
+library(mlogit)
+```
+
+This section might be called "Results" instead of "Applications," depending on what it is that you are working on. But you'll probably say something like "The initial model estimation results are given in @tbl-estimationresults" That table is created with the `modelsummary()` package and function.
+
+```{r estimation}
+tar_load(models)
+```
+
+```{r estimation-results}
+#| label: tbl-estimationresults
+#| tbl-cap: Model Summary Results
+modelsummary(models, estimate = "{estimate} ({statistic})")
+```
+
+Sometimes, it is nice to put the models or your other results into a figure instead
+of a table. Have a look at @fig-modelplot. Note that your figures might look better
+in pdf if you use the `tikz` rendering device.
+
+```{r modelplot}
+#| label: fig-modelplot
+#| fig-cap: Estimated model coefficients and confidence intervals.
+#| 
+modelplot(models) +
+  xlab("Coefficient estimates")
+```
+
+
+With those results presented, you can go into a discussion of what they mean. first, discuss the actual results that are shown in the table, and then any interesting or unintuitive observations.
+
+
+## Additional Analysis
+
+Usually, it is good to use your model for something.
+
+-   Hypothetical policy analysis
+-   Statistical validation effort
+-   Equity or impact analysis
+
+If the analysis is substantial, it might become its own top-level section.

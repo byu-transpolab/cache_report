@@ -1,0 +1,59 @@
+project:
+  type: book
+
+# This defines the .qmd files that are in your document
+book:
+  title: "A Template Quarto Repository"
+  author:
+    - name: Gregory S. Macfarlane
+      orcid: 0000-0003-3999-7584
+      email: gregmacfarlane@gmail.com
+      affiliations:
+        - name: Civil and Construction Engineering Department, Brigham Young University
+          address: 430 EB
+          city: Provo
+          state: UT
+          postal-code: 84602
+    # to add additional authors, simply add another -name: tag 
+  date: "1/25/2023"
+  chapters:
+    - index.qmd
+    - 01_introduction.qmd
+    - 02_litreview.qmd
+    - 03_methods.qmd
+    - 04_results.qmd
+    - 05_conclusion.qmd
+    - references.qmd
+  abstract: |
+    The abstract is a crucial component of any scientific paper, as it 
+    provides a summary of the research and its main findings. This paper 
+    provides guidelines for writing an effective scientific abstract. 
+    The first step is to identify the key elements of the research, such 
+    as the research question, methods, results, and conclusions. Next, 
+    the abstract should be written in a clear and concise manner, using 
+    simple language and avoiding technical jargon. The abstract should 
+    also be structured, with a clear introduction, methods section, results 
+    section, and conclusion. Additionally, the abstract should accurately 
+    and succinctly convey the main findings of the research, highlighting the 
+    significance and implications of the work. By following these 
+    guidelines, researchers can ensure that their abstract effectively communicates 
+    the key aspects of their research and attracts the attention of potential 
+    readers. - Written by ChatGPT
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  elsevier-pdf:
+    include-in-header: 
+      - packages.tex
+    journal:
+      name: Transportation Research Part A
+      cite-style: authoryear
+    keep-tex: true
+    top-level-division: section
+    toc: false
+
+editor: visual
+

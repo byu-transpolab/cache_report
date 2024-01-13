@@ -1,0 +1,26 @@
+# Introduction
+
+The introduction of your report is not simply an "introduction", but rather a 
+**motivation** of why your project matters. What is the cost of not solving 
+this problem? What have been previous attempts to solve this problem? The *why*
+is more important than the *what*. Why is this article worthy of archiving?
+
+The introduction to an article is usually three or so paragraphs long. First,
+state the overall context of the problem, with citations to basic statistics and
+previous major findings. Then, Discuss the specific context of your research;
+why have previous methods or research not addressed your specific issue? You
+also need to have citations here.
+
+In the third paragraph, you can introduce the purpose of your research and the
+new method or data you bring to the issue. This paragraph often begins with a
+statement similar to "In this paper, we present..." 
+
+An outline of the article is then usually a good idea, even though the outline
+might change little from article to article. A Literature Review details prior
+research in this area, and discusses its strengths and limitations. A
+Methodology section identifies the data, models, and other elements you use,
+while a Results section presents the outcomes of your methodology with tables
+and figures and a comprehensive discussion of their meanings. Discussions, and
+Conclusions sections may present your interpretations of your findings for future
+research, policy, etc.
+

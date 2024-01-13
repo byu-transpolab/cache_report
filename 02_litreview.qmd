@@ -1,0 +1,22 @@
+# Literature Review
+
+The literature review is not simply a "review" or a list of what has been done in the past. This needs to a thoughtful synthesis that accomplishes two things:
+
+-   Shows that you understand the previous efforts that other people have made on this problem.
+-   Identifies the limitation or the gap in those previous efforts.
+
+You will have already mentioned this gap in the introduction, but here you need to build a solid case for why what you are doing is a meaningful contribution.
+
+Literature reviews do not have a specific guidelines for length or number of citations. It's more about making a rhetorical argument; if it's a new problem then the review can be shorter. But you'll need to refer to previous attempts at the problem, the methods you are trying, and other things.
+
+## Citations and Bibliographies
+
+Quarto has a robust method for generating citations. If you follow the [setup instructions](https://quarto.org/docs/visual-editor/technical.html#citations-from-zotero), then you can easily search your database from inside Rstudio after typing the `@` command. Keep your Zotero database up-to-date and correct (and share it with your coauthors!) to minimize the pain you will feel in writing articles.
+
+Note that there are two ways to make citations. Doing `@key` will give you a text citation, allowing you to refer to the author mid-sentence.
+
+> @ben-akivaDiscreteChoiceAnalysis1985 is the canonical reference in choice modeling for transportation.
+
+But if you put the citation in brackets like `[@citationkey]` you can make parenthetical citations. You can also give page numbers for quotes or specific findings this way.
+
+> The difference in the choice model logsum can be used as a measure of consumer surplus, and therefore accessibility improvement [@ben-akivaDiscreteChoiceAnalysis1985, p. 301].

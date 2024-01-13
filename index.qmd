@@ -1,0 +1,17 @@
+# Preface {.unnumbered}
+
+This is a template repository that I and my students can use to start projects that will implement the workflow presented in my [lab documentation](https://gregmacfarlane.github.io/lab/workflow.html). It also serves as an instruction manual in this workflow, a template article, and a sandbox for me to practice and learn. I encourage students to use the [Quarto Guide](https://quarto.org/docs/guide/) as their primary reference.
+
+The document in this template renders to two[^index-1] outputs:
+
+[^index-1]: I hope to make it possible to render the article to a BYU Engineering thesis as well. Give me a bit of time.
+
+-   A website
+
+-   An Elsevier journal article
+
+To render this document, use the command `quarto render` in your terminal pointed at the working directory. This will create a website available locally in a `_book` folder and a PDF of the article stored in that folder.
+
+To render your website *and* push its content to a live website, use the command `quarto publish gh-pages`. Details of this process are available on the [Quarto guide](https://quarto.org/docs/publishing/github-pages.html#publish-command).
+
+You can change the article to a different publisher by following the directions at the [Quarto Journal Templates GitHub](https://github.com/quarto-journals) repository.
