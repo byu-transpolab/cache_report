@@ -6,3 +6,47 @@ format: pdf
 ---
 
 Overall design memo
+
+# Notes so far
+
+-   Use Aequilibre for network (use the open standard)
+-   Probably use SEMCOG to base the model on, due to WFH implementation
+-   Asim steps to include:
+    -   Essential/behind-the-scenes
+        -   Init
+        -   Access
+        -   shadow price?
+        -   cdap
+        -   write tables etc
+    -   Models
+        -   WFH
+        -   school location
+        -   work location
+        -   ~~transit pass~~ (assumed)
+        -   auto ownership
+        -   ~~vehicle type~~ (assumed)
+        -   Telecommute freq
+        -   ~~free parking~~
+        -   tour freq/scheduling
+        -   vehicle allocation
+        -   tour mode choice
+        -   atwork
+        -   intermediate stop(s)
+        -   trip freq/sched (decide on probability vs logit) (likely prob, as logit is part of another model)
+        -   trip mode
+        -   ~~parking location~~
+
+Make a note/list of where we will get the data to estimate these coefficients from.
+We will have the HH travel survey, note if we need data from anywhere else.
+
+Make sure to get all this data:
+
+-   Highway network
+-   Transit network
+-   Bike network (w/topography?)
+-   SE data by TAZ
+-   TAZ geojson
+
+All this goes in the data repo
+
+Also synth pop from ACS PUMS?
