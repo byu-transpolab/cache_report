@@ -1,0 +1,34 @@
+author:
+  - name: Emily Blanchard
+    # email: kamrynwm@student.byu.edu
+    # orcid:
+    affiliations:
+      - ref: byucce
+  - name: Hayden Atchley
+    email: satchley@byu.edu
+    orcid: 0000-0002-0815-3488
+    affiliations:
+      - ref: byucce
+
+date: today
+date-format: D MMMM YYYY
+  
+affiliations:
+  - id: byucce
+    name: Civil and Construction Engineering Department, Brigham Young University
+    address: 430 EB
+    city: Provo
+    state: UT
+    postal-code: 84602
+    
+bibliography:
+  - ../bib/references.bib
+  # - ../bib/packages.bib
+  # - ../bib/matsim.bib
+
+lof: false
+lot: false
+fig-align: center
+
+execute:
+  echo: false

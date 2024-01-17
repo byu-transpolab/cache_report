@@ -1,0 +1,8 @@
+---
+title: "Overall Design"
+metadata-files:
+  - _info.yml
+format: pdf
+---
+
+Overall design memo
