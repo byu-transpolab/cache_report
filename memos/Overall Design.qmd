@@ -23,6 +23,8 @@ Unlike the traditional 4-step model that focus solely on trips between origins a
 In an activity-based travel model, individuals participate in various activities such as work, shopping, recreation, or education.
 The model takes into account the scheduling and sequences of these events, as well as the travel choices make by the individuals to fulfill their activity needs.
 
+# Model Design
+
 We will create an implementation of ActivitySim to model travel demand in the study area.
 Our ActivitySim implementation will be based on the existing SEMCOG model, in part due to its inclusion of remote work submodels.
 However, ActivitySim does not assign network traffic, so we will use AequilibraE for this step.
@@ -78,53 +80,27 @@ The SEMCOG model contains the following model steps:
 Nearly all of these submodels can be estimated using data from the Utah Household Travel Survey.
 However, the free parking model will be fixed at the TAZ level to charge for parking only at USU campus.
 Additionally, the transit system is fully funded by sales tax, and so we will not estimate transit pass ownership or subsidies, as transit is free for everyone.
+Our model will have the same pipeline as above with these exceptions.
 
-For Report 1 (due Feb 5th) we plan to complete: Network Assignment, Accessibility (skims), Work From Home (WFH), Auto Ownership, and Telecommute Frequency.
+# Project Schedule
 
-For Report 2 (due March 1st) we plan to complete: School Location, Work Location, Coordinated Daily Activity Pattern (CDAP), Mandatory Tour Frequency/Scheduling, Non-Mandatory Tour Frequency/Destination Choice/Scheduling, and Tour Mode Choice.
+The following is a rough schedule for the project:
 
-For Report 3 (due April 1st) we plan to complete: School Escorting, Joint Tour Frequency/Composition/Participation/Destination Choice/Scheduling, At Work Subtours Frequency/Destination Choice/Scheduling/Mode, Intermediate Stop Frequency, and Trip Scheduling (probabilistic).
+Report 1 (Feb 5):
 
--   Use Aequilibre for network (use the open standard)
--   Probably use SEMCOG to base the model on, due to WFH implementation
--   Asim steps to include:
-    -   Essential/behind-the-scenes
-        -   Init
-        -   Access
-        -   shadow price?
-        -   cdap
-        -   write tables etc
-    -   Models
-        -   WFH
-        -   school location
-        -   work location
-        -   ~~transit pass~~ (assumed)
-        -   auto ownership
-        -   ~~vehicle type~~ (assumed)
-        -   Telecommute freq
-        -   ~~free parking~~
-        -   tour freq/scheduling
-        -   vehicle allocation
-        -   tour mode choice
-        -   atwork
-        -   intermediate stop(s)
-        -   trip freq/sched (decide on probability vs logit) (likely prob, as logit is part of another model)
-        -   trip mode
-        -   ~~parking location~~
+-   Network assignment (AequilibraE)
+-   Accessibility (network skims)
+-   Work from home / telecommute frequency
+-   Vehicle ownership
 
-init access wfh school/work location transit pass auto own free parking tc freq cdap man tour j tour nm tour tour mode aw tour stop freq trip purp trip dest trip p/d trip sched trip mc
+Report 2 (March 1):
 
-Make a note/list of where we will get the data to estimate these coefficients from.
-We will have the HH travel survey, note if we need data from anywhere else.
+-   School/work location
+-   Daily activity pattern
+-   All mandatory, non-mandatory, and joint tour models including mode choice
 
-Make sure to get all this data:
+Report 3 (Apr 1):
 
--   Highway network
--   Transit network
--   Bike network (w/topography?)
--   SE data by TAZ
--   TAZ geojson
-
-All this goes in the data repo
-
-Also synth pop from ACS PUMS?
+-   All at-work subtour models
+-   Intermediate stop frequency
+-   All trip models
