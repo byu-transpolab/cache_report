@@ -5,16 +5,15 @@ metadata-files:
 format: pdf
 ---
 
-Overall design memo
+This memo serves to outline the scope of the project, as well as provide a rough schedule.
 
-# Notes so far
+# Background
 
 Logan, Utah, situated in northern Cache County with a population of approximately 55,000 residents, is home to the main campus of Utah State University (USU) with an enrollment of about 18,000 students.
 The city is served by the Cache Valley Transit District (CVTD), a local transit system that operates with zero fares funded by sales tax.
 With 20 distinct routes, CVTD provides convenient travel for Logan residents, connecting them to various parts of the city and county.
 
 CVTD operates the Loop, a route spanning from USU to Main Street, creating a continuous loop.
-Notably, the Green Line buses follow a clockwise direction, while the Blue Line buses travel counter-clockwise.
 Due to its relative distance from major metropolitan areas, Logan experiences minimal cross traffic, with the majority of traffic being internal.
 The unique location and characteristics of Logan make it an ideal candidate for modeling travel behavior using an activity-based travel model.
 
@@ -23,24 +22,68 @@ An activity-based travel model is a method used to understand and predict travel
 Unlike the traditional 4-step model that focus solely on trips between origins and destinations, activity-based models consider the full range of activities people engage in and the associated travel.
 In an activity-based travel model, individuals participate in various activities such as work, shopping, recreation, or education.
 The model takes into account the scheduling and sequences of these events, as well as the travel choices make by the individuals to fulfill their activity needs.
-To implement the activity-based travel model, we will use AequilibraE for the network and assignment, \[\_\_\_\_\_\_\_\] to create a synthetic population, and ActivitySim for modeling the various steps of the model.
 
-We will use AequilibraE for the network and assignment.
+We will create an implementation of ActivitySim to model travel demand in the study area.
+Our ActivitySim implementation will be based on the existing SEMCOG model, in part due to its inclusion of remote work submodels.
+However, ActivitySim does not assign network traffic, so we will use AequilibraE for this step.
 We will need the highway network, transit network, and bike network.
 If there is not an existing bike network, then we will add one to the model using Google Earth to identify and map the existing network.
 
-To create the synthetic population, we will ....
+We will also use PopulationSim to create a synthetic population for the area.
+Our synthetic population will largely be based on an existing PopulationSim implementation for Cedar City, UT, tailored for Logan.
+Most of the PopulationSim controls will come from the Census, though the TAZ-level data will come from an existing travel demand model for Logan.
+Number of households is the only TAZ-level control we will use, however, due to its importance in modeling trip generation.
 
-We will use ActivitySim to create the model itself.
-We will using the SEMCOG base model (based on Detroit, Michigan) because it has a work from home (WFH) model included.
-There are many models to include and we will be able to calibrate them and estimate the appropriate coefficients for each using the Utah Household Travel Survey.
-We will divide the models calibration into groups to serve as a schedule for the semester.
+The SEMCOG model contains the following model steps:
+
+-   initialize_landuse
+-   initialize_households
+-   compute_accessibility
+-   work_from_home
+-   add_size_tables
+-   school_location
+-   workplace_location
+-   transit_pass_subsidy
+-   transit_pass_ownership
+-   auto_ownership_simulate
+-   free_parking
+-   telecommute_frequency
+-   cdap_simulate
+-   mandatory_tour_frequency
+-   mandatory_tour_scheduling
+-   joint_tour_frequency
+-   joint_tour_composition
+-   joint_tour_participation
+-   joint_tour_destination
+-   joint_tour_scheduling
+-   non_mandatory_tour_frequency
+-   non_mandatory_tour_destination
+-   non_mandatory_tour_scheduling
+-   tour_mode_choice_simulate
+-   atwork_subtour_frequency
+-   atwork_subtour_destination
+-   atwork_subtour_scheduling
+-   atwork_subtour_mode_choice
+-   stop_frequency
+-   trip_purpose
+-   trip_destination
+-   trip_purpose_and_destination
+-   trip_scheduling
+-   trip_mode_choice
+-   write_data_dictionary
+-   track_skim_usage
+-   write_tables
+-   write_trip_matrices
+
+Nearly all of these submodels can be estimated using data from the Utah Household Travel Survey.
+However, the free parking model will be fixed at the TAZ level to charge for parking only at USU campus.
+Additionally, the transit system is fully funded by sales tax, and so we will not estimate transit pass ownership or subsidies, as transit is free for everyone.
 
 For Report 1 (due Feb 5th) we plan to complete: Network Assignment, Accessibility (skims), Work From Home (WFH), Auto Ownership, and Telecommute Frequency.
 
 For Report 2 (due March 1st) we plan to complete: School Location, Work Location, Coordinated Daily Activity Pattern (CDAP), Mandatory Tour Frequency/Scheduling, Non-Mandatory Tour Frequency/Destination Choice/Scheduling, and Tour Mode Choice.
 
-For Report 3 (due April 1st) we plan to complete: School Escorting, Joint Tour Frequency/Composition/Participation/Destination Choice/Scheduling, At Work Subtours Frequency/Destination Choice/Scheduling/Mode, Intermediate Stop Frequency, and Trip Scheudling (probabilistic).
+For Report 3 (due April 1st) we plan to complete: School Escorting, Joint Tour Frequency/Composition/Participation/Destination Choice/Scheduling, At Work Subtours Frequency/Destination Choice/Scheduling/Mode, Intermediate Stop Frequency, and Trip Scheduling (probabilistic).
 
 -   Use Aequilibre for network (use the open standard)
 -   Probably use SEMCOG to base the model on, due to WFH implementation
@@ -68,6 +111,8 @@ For Report 3 (due April 1st) we plan to complete: School Escorting, Joint Tour F
         -   trip freq/sched (decide on probability vs logit) (likely prob, as logit is part of another model)
         -   trip mode
         -   ~~parking location~~
+
+init access wfh school/work location transit pass auto own free parking tc freq cdap man tour j tour nm tour tour mode aw tour stop freq trip purp trip dest trip p/d trip sched trip mc
 
 Make a note/list of where we will get the data to estimate these coefficients from.
 We will have the HH travel survey, note if we need data from anywhere else.
