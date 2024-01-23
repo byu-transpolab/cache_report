@@ -32,3 +32,6 @@ fig-align: center
 
 execute:
   echo: false
+
+mainfont: Gentium Book Basic
+sansfont: Alte Haas Grotesk
