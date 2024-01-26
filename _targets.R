@@ -4,15 +4,13 @@ library(targets)
 library(tarchetypes)
 
 tar_option_set(
-  packages = c("tidyverse", "sf", "ggspatial", "wesanderson", "scales", "od"),
+  packages = c("tidyverse", "wesanderson", "scales"),
   # memory = "transient",
   # garbage_collection = TRUE,
   # format = "qs",
 )
 
-r_files <- list.files("R", full.names = TRUE)
-sapply(r_files, source)
-
+sapply(list.files("R", full.names = TRUE), source)
 
 #### List targets ##############################################################
 
@@ -23,7 +21,9 @@ misc_targets <- tar_plan(
 
 # Data ####
 data_targets <- tar_plan(
-  
+  tar_file(utah_hhts, "data/ut_hhts_2012.xlsb"),
+  hhts = readxl::read_excel(utah_hhts, sheet = 1),
+  taz_se = readxl::read_excel(utah_hhts, sheet = "TAZ")
 )
 
 # Network ####
@@ -76,4 +76,3 @@ tar_plan(
   tour_targets,
   trip_targets,
 )
-
