@@ -21,9 +21,9 @@ misc_targets <- tar_plan(
 
 # Data ####
 data_targets <- tar_plan(
-  tar_file(utah_hhts, "data/ut_hhts_2012.xlsb"),
-  hhts = readxl::read_excel(utah_hhts, sheet = 1),
-  taz_se = readxl::read_excel(utah_hhts, sheet = "TAZ")
+  tar_file(utah_hhts_trips, "data/ut_hhts_2012_trip_data.csv.gz"),
+  tar_file(utah_hhts_hh, "data/ut_hhts_2012_hh_data.csv.gz"),
+  tar_file(utah_hhts_taz, "data/ut_hhts_2012_taz_data.csv.gz"),
 )
 
 # Network ####
