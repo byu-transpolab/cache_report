@@ -137,22 +137,6 @@
       ],
       "Hash": "0c54cf3a08cc0e550fbd64ad33166143"
     },
-    "bayestestR": {
-      "Package": "bayestestR",
-      "Version": "0.13.1",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "datawizard",
-        "graphics",
-        "insight",
-        "methods",
-        "stats",
-        "utils"
-      ],
-      "Hash": "61f643ea5ee9fe0e70ab0246340b3c2e"
-    },
     "bit": {
       "Package": "bit",
       "Version": "4.0.5",
@@ -267,18 +251,6 @@
       ],
       "Hash": "f61dbaec772ccd2e17705c1e872e9e7c"
     },
-    "checkmate": {
-      "Package": "checkmate",
-      "Version": "2.3.1",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "backports",
-        "utils"
-      ],
-      "Hash": "c01cab1cb0f9125211a6fc99d540e315"
-    },
     "cli": {
       "Package": "cli",
       "Version": "3.6.2",
@@ -379,19 +351,6 @@
         "methods"
       ],
       "Hash": "6ea17a32294d8ca00455825ab0cf71b9"
-    },
-    "datawizard": {
-      "Package": "datawizard",
-      "Version": "0.9.1",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "insight",
-        "stats",
-        "utils"
-      ],
-      "Hash": "51cf8172b52cfa5b4b988c73c37accfa"
     },
     "dbplyr": {
       "Package": "dbplyr",
@@ -821,19 +780,6 @@
       ],
       "Hash": "eef74fe28b747e52288ea9e1d3600034"
     },
-    "insight": {
-      "Package": "insight",
-      "Version": "0.19.7",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "methods",
-        "stats",
-        "utils"
-      ],
-      "Hash": "750aba9b42391da33ac290b71a749023"
-    },
     "isoband": {
       "Package": "isoband",
       "Version": "0.2.7",
@@ -1057,25 +1003,6 @@
       ],
       "Hash": "4f50122dc256b1b6996a4703fecea821"
     },
-    "modelsummary": {
-      "Package": "modelsummary",
-      "Version": "1.4.3",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "checkmate",
-        "data.table",
-        "generics",
-        "glue",
-        "insight",
-        "kableExtra",
-        "parameters",
-        "performance",
-        "tables"
-      ],
-      "Hash": "ab3f79e32ad9ea51af4f20d0c43ca67e"
-    },
     "munsell": {
       "Package": "munsell",
       "Version": "0.5.0",
@@ -1110,39 +1037,6 @@
         "askpass"
       ],
       "Hash": "2a0dc8c6adfb6f032e4d4af82d258ab5"
-    },
-    "parameters": {
-      "Package": "parameters",
-      "Version": "0.21.3",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "bayestestR",
-        "datawizard",
-        "graphics",
-        "insight",
-        "methods",
-        "stats",
-        "utils"
-      ],
-      "Hash": "d6b15d1e41faf8951b59f5b3051ad3e3"
-    },
-    "performance": {
-      "Package": "performance",
-      "Version": "0.10.8",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "bayestestR",
-        "datawizard",
-        "insight",
-        "methods",
-        "stats",
-        "utils"
-      ],
-      "Hash": "92873fb57cc5b73fe2aa0b09056a789a"
     },
     "pillar": {
       "Package": "pillar",
@@ -1535,19 +1429,26 @@
       ],
       "Hash": "15b594369e70b975ba9f064295983499"
     },
-    "tables": {
-      "Package": "tables",
-      "Version": "0.9.17",
+    "tarchetypes": {
+      "Package": "tarchetypes",
+      "Version": "0.7.11",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
-        "htmltools",
-        "knitr",
-        "stats",
-        "utils"
+        "digest",
+        "dplyr",
+        "fs",
+        "parallel",
+        "rlang",
+        "targets",
+        "tibble",
+        "tidyselect",
+        "utils",
+        "vctrs",
+        "withr"
       ],
-      "Hash": "22af1e94a64cf8713c4f79362eeb0fd6"
+      "Hash": "156780d04fe436c7141f2d21b2b3446e"
     },
     "targets": {
       "Package": "targets",
@@ -1800,6 +1701,16 @@
         "magrittr"
       ],
       "Hash": "16858ee1aba97f902d24049d4a44ef16"
+    },
+    "wesanderson": {
+      "Package": "wesanderson",
+      "Version": "0.3.7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "f0d5ebcc72b5d6d2f338be8d80d39004"
     },
     "withr": {
       "Package": "withr",
