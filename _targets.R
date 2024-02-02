@@ -28,7 +28,11 @@ data_targets <- tar_plan(
 
 # Network ####
 network_targets <- tar_plan(
+  tar_file(network_nodes, "data/network/cube_nodes.csv"),
+  tar_file(network_links, "data/network/cube_links.csv"),
   
+  # nodes = make_gmns_nodes(network_nodes),
+  # links = make_gmns_links(network_links),
 )
 
 
