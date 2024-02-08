@@ -1,10 +1,10 @@
-#### Setup #####################################################################
+#### Setup #############################################################
 
 library(targets)
 library(tarchetypes)
 
 tar_option_set(
-  packages = c("tidyverse", "wesanderson", "scales"),
+  packages = c("tidyverse", "wesanderson", "scales", "sf"),
   # memory = "transient",
   # garbage_collection = TRUE,
   # format = "qs",
@@ -12,7 +12,7 @@ tar_option_set(
 
 sapply(list.files("R", full.names = TRUE), source)
 
-#### List targets ##############################################################
+#### List targets ######################################################
 
 # Misc ####
 misc_targets <- tar_plan(
@@ -28,11 +28,15 @@ data_targets <- tar_plan(
 
 # Network ####
 network_targets <- tar_plan(
-  tar_file(network_nodes, "data/network/cube_nodes.csv"),
-  tar_file(network_links, "data/network/cube_links.csv"),
+  tar_file(nodes_table_file, "data/network/cube_nodes.csv"),
+  tar_file(links_table_file, "data/network/cube_links.csv"),
+  tar_file(nodes_geo_file, "data/network/cache_nodes.geojson"),
+  tar_file(links_geo_file, "data/network/cache_links.geojson"),
   
-  # nodes = make_gmns_nodes(network_nodes),
-  # links = make_gmns_links(network_links),
+  nodes = make_gmns_nodes(nodes_geo_file),
+  links = make_gmns_links(links_geo_file),
+  write_nodes = readr::write_csv(nodes, "data/network/gmns/nodes.csv"),
+  write_links = readr::write_csv(links, "data/network/gmns/links.csv"),
 )
 
 
@@ -67,7 +71,7 @@ trip_targets <- tar_plan(
 )
 
 
-#### Run all targets ###########################################################
+#### Run all targets ###################################################
 
 tar_plan(
   misc_targets,
