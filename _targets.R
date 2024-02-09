@@ -23,8 +23,20 @@ misc_targets <- tar_plan(
 # Data ####
 data_targets <- tar_plan(
   tar_file(utah_hhts_trips, "data/ut_hhts_2012_trip_data.csv.gz"),
+  hhts_trips = read_csv(utah_hhts_trips),
   tar_file(utah_hhts_hh, "data/ut_hhts_2012_hh_data.csv.gz"),
+  hhts_hh = read_csv(utah_hhts_hh),
   tar_file(utah_hhts_taz, "data/ut_hhts_2012_taz_data.csv.gz"),
+  hhts_taz = read_csv(utah_hhts_taz),
+  
+  tar_file(nhts_hhpub, "data/HHPUB.sav"),
+  nhts_hh = read_spss(nhts_hhpub),
+  tar_file(nhts_perpub, "data/PERPUB.sav"),
+  nhts_per = read_spss(nhts_perpub),
+  tar_file(nhts_trippub, "data/TRIPPUB.sav"),
+  nhts_trip = read_spss(nhts_trippub),
+  tar_file(nhts_vehpub, "data/VEHPUB.sav"),
+  nhts_veh = read_spss(nhts_vehpub)
 )
 
 # Network ####
