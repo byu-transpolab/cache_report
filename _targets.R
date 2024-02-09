@@ -2,9 +2,10 @@
 
 library(targets)
 library(tarchetypes)
+library(haven)
 
 tar_option_set(
-  packages = c("tidyverse", "wesanderson", "scales"),
+  packages = c("tidyverse", "wesanderson", "scales", "modelsummary", "mlogit"),
   # memory = "transient",
   # garbage_collection = TRUE,
   # format = "qs",
