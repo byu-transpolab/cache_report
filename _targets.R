@@ -39,21 +39,34 @@ data_targets <- tar_plan(
   nhts_veh = read_spss(nhts_vehpub)
 )
 
-# Network ####
-network_targets <- tar_plan(
-  
+# Vehicle ownership ####
+veho_targets <- tar_plan(
+  clean_veho = clean_veh_own(hhts_hh),
+  veho_summary = veh_own_summary(clean_veho),
+  veho_model = estimate_veho(clean_veho)
 )
 
 
-# Remote work ####
+# Work From Home ####
+wfh_targets <- tar_plan(
+  clean_wfh = clean_wk_fm_hm(nhts_per),
+  wfh_summary = wk_fm_hm_summary(clean_wfh),
+  wfh_model = estimate_wfh(clean_wfh)
+)
+
+
+# Telecommuting Frequency ####
 wfh_targets <- tar_plan(
   
 )
 
-# Vehicle ownership ####
-veho_targets <- tar_plan(
+
+# Network ####
+network_targets <- tar_plan(
+  
   
 )
+
 
 # Mandatory location ####
 mandatory_location_targets <- tar_plan(
