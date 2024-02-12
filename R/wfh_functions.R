@@ -1,11 +1,15 @@
 #' Estimate WFH model (mlogit)
 #' 
-#' @param per Persons table
-#' @param ... Arguments passed to `dplyr:: filter()`
-
-estimate_wfh <- function(per, ...) {
-	format_per <- per %>%
-		filter(...) %>%
+#' @param nhts_per Persons table from NHTS
+#' @export
+estimate_wfh <- function(nhts_per) {
+	format_per <- nhts_per %>%
+		filter(
+			as.integer(R_SEX) > 0,
+			as.integer(HHFAMINC_cat) > 0,
+			MSACAT == "03",
+			WORKER == "01"
+		) %>%
 		dfidx(choice = "WRKLOC", shape = "wide")
 		
 	model <- mlogit(
@@ -15,11 +19,7 @@ estimate_wfh <- function(per, ...) {
 		weights = format_per$WTPERFIN
 	)
 	
+	summary(model)
+	
 	return(model)
 }
-
-# estimate_wfh(
-# 	zap_labels(per),
-# 	as.integer(R_SEX) > 0,
-# 	as.integer(HHFAMINC_cat) > 0
-# )

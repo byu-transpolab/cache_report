@@ -67,11 +67,7 @@ wfh_targets <- tar_plan(
 	# clean_wfh = clean_wk_fm_hm(nhts_per),
 	# wfh_summary = wk_fm_hm_summary(clean_wfh),
 	# wfh_model = estimate_wfh(clean_wfh)
-	wfh_model = estimate_wfh(
-		zap_labels(nhts$per),
-		as.integer(R_SEX) > 0,
-		as.integer(HHFAMINC_cat) > 0
-	),
+	wfh_model = estimate_wfh(haven::zap_labels(nhts$per)),
 
 	# Telecommuting Frequency 
 

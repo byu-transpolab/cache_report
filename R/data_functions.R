@@ -1,3 +1,12 @@
+#' Clean UT Household Travel Survey
+#' 
+#' @param ut_trips Trips file from UT HHTS
+#' @param ut_hh HH file from UT HHTS
+#' @param ut_taz TAZ file from UT HHTS
+#' 
+#' @return A list containing tables of the cleaned survey data
+#'
+#'@export
 clean_ut_hhts <- function(ut_trips, ut_hh, ut_taz) {
 	trips <- read_csv(ut_trips)
 	hh <- read_csv(ut_hh)
@@ -14,6 +23,15 @@ clean_ut_hhts <- function(ut_trips, ut_hh, ut_taz) {
 	)
 }
 
+#' Clean UT Household Travel Survey
+#' 
+#' @param ut_trips Trips file from UT HHTS
+#' @param ut_hh HH file from UT HHTS
+#' @param ut_taz TAZ file from UT HHTS
+#' 
+#' @return A list containing tables of the cleaned survey data
+#' 
+#' @export
 clean_nhts <- function(nhts_trips, nhts_hh, nhts_per, nhts_veh) {
 	trips <- read_sav(nhts_trips)
 	hh <- read_sav(nhts_hh)
@@ -36,6 +54,10 @@ clean_nhts <- function(nhts_trips, nhts_hh, nhts_per, nhts_veh) {
 	)
 }
 
+
+#' Clean HH vars from NHTS
+#'
+#' @param df Table to apply cleaning functions to
 clean_nhts_hh_vars <- function(df){
 	df %>% 
 		mutate(
