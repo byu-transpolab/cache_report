@@ -1,7 +1,7 @@
 ---
 title: "Overall Design"
 metadata-files:
-  - _info.yml
+  - _metadata.yml
 format: pdf
 ---
 

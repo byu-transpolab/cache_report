@@ -10,18 +10,18 @@
 #' @return A cleaned data frame with selected columns.
 
 clean_veh_own <- function(data) {
-  clean_veho <- data %>% 
-    filter(CO_NAME == 'CACHE') %>% 
-    mutate(hh_income_cat = case_when(
-      hh_income %in% 1:3 ~ "1",
-      hh_income %in% 4:6 ~ "2",
-      hh_income %in% 7:10 ~ "3")) %>% 
-    dplyr::filter(!is.na(hh_income_cat)) %>%
-    # mutate(ad_suff = if_else(hh_adults - num_vehicles < 0, 0, hh_adults - num_vehicles)) %>% 
-           # wk_suff = if_else(workers - num_vehicles < 0, 0, workers - num_vehicles))
-    dplyr::select(num_vehicles_cat, hh_income_cat, hh_adults, workers)
-  
-  return(clean_veho)
+	clean_veho <- data %>% 
+		filter(CO_NAME == 'CACHE') %>% 
+		mutate(hh_income_cat = case_when(
+			hh_income %in% 1:3 ~ "1",
+			hh_income %in% 4:6 ~ "2",
+			hh_income %in% 7:10 ~ "3")) %>% 
+		dplyr::filter(!is.na(hh_income_cat)) %>%
+		# mutate(ad_suff = if_else(hh_adults - num_vehicles < 0, 0, hh_adults - num_vehicles)) %>% 
+		# wk_suff = if_else(workers - num_vehicles < 0, 0, workers - num_vehicles))
+		dplyr::select(num_vehicles_cat, hh_income_cat, hh_adults, workers)
+	
+	return(clean_veho)
 }
 
 
@@ -35,13 +35,13 @@ clean_veh_own <- function(data) {
 #' @return A data frame containing the mean and standard deviation for each variable.
 
 veh_own_summary <- function(data) {
-  summary_table <- data %>%
-    summarise_all(list(
-      Mean = ~mean(.),
-      St_Dev = ~sd(.)
-    ))
-  
-  return(summary_table)
+	summary_table <- data %>%
+		summarise_all(list(
+			Mean = ~mean(.),
+			St_Dev = ~sd(.)
+		))
+	
+	return(summary_table)
 }
 
 
@@ -55,12 +55,12 @@ veh_own_summary <- function(data) {
 #' @return A summary of the estimated multinomial logit model.
 
 estimate_veho <- function(data) {
-  veho_model <- mlogit(
-    formula = num_vehicles_cat ~ 1 | hh_income_cat + workers +hh_income_cat,
-    data = data,
-    shape = "wide",
-    choice = "num_vehicles_cat",
-    sep = ""
-  )
-  modelsummary(veho_model)
+	veho_model <- mlogit(
+		formula = num_vehicles_cat ~ 1 | hh_income_cat + workers +hh_income_cat,
+		data = data,
+		shape = "wide",
+		choice = "num_vehicles_cat",
+		sep = ""
+	)
+	modelsummary(veho_model)
 }

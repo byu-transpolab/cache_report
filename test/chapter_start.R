@@ -21,13 +21,13 @@ options(knitr.kable.NA = '')
 options(kableExtra.latex.load_packages = FALSE) 
 # round and format numbers that get printed in the text of the article.
 inline_hook <- function(x) {
-  if (is.numeric(x)) {
-    format(x, digits = 3, big.mark = ",")
-  } else x
+	if (is.numeric(x)) {
+		format(x, digits = 3, big.mark = ",")
+	} else x
 }
 knitr::knit_hooks$set(inline = inline_hook)
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 # options for latex-only output
 if(knitr::is_latex_output()) {
-  knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+	knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 } 
