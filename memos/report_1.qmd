@@ -1,0 +1,8 @@
+---
+title: "Report 1"
+metadata-files:
+  - _info.yml
+format: pdf
+---
+
+This is Report 1, which has info on: the network, auto ownership, and wfh/telecommute frequency.
