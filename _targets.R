@@ -5,7 +5,7 @@ library(tarchetypes)
 library(haven)
 
 tar_option_set(
-	packages = c("tidyverse", "wesanderson", "scales", "modelsummary", "mlogit", "broom"),
+	packages = c("tidyverse", "wesanderson", "scales", "modelsummary", "mlogit", "broom", "labelled", "dfidx"),
 	# memory = "transient",
 	# garbage_collection = TRUE,
 	# format = "qs",
@@ -49,27 +49,32 @@ data_targets <- tar_plan(
 	tar_file(nhts_trippub, "data/nhts/TRIPPUB.sav.gz"),
 	nhts_trip = read_sav(nhts_trippub),
 	tar_file(nhts_vehpub, "data/nhts/VEHPUB.sav.gz"),
-	nhts_veh = read_sav(nhts_vehpub)
+	nhts_veh = read_sav(nhts_vehpub),
 )
 
 # Vehicle ownership ####
 veho_targets <- tar_plan(
-	clean_veho = clean_veh_own(hhts_hh),
-	veho_summary = veh_own_summary(clean_veho),
-	veho_model = estimate_veho(clean_veho)
+	# clean_veho = clean_veh_own(hhts_hh),
+	# veho_summary = veh_own_summary(clean_veho),
+	# veho_model = estimate_veho(clean_veho),
 )
 
 
 # Work From Home ####
 wfh_targets <- tar_plan(
-	clean_wfh = clean_wk_fm_hm(nhts_per),
-	wfh_summary = wk_fm_hm_summary(clean_wfh),
-	wfh_model = estimate_wfh(clean_wfh)
-)
+	# WFH
+	
+	# clean_wfh = clean_wk_fm_hm(nhts_per),
+	# wfh_summary = wk_fm_hm_summary(clean_wfh),
+	# wfh_model = estimate_wfh(clean_wfh)
+	wfh_model = estimate_wfh(
+		zap_labels(nhts$per),
+		as.integer(R_SEX) > 0,
+		as.integer(HHFAMINC_cat) > 0
+	),
 
+	# Telecommuting Frequency 
 
-# Telecommuting Frequency ####
-wfh_targets <- tar_plan(
 	
 )
 

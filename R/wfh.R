@@ -73,13 +73,13 @@ wk_fm_hm_summary <- function(data) {
 #'
 #' @return A summary of the estimated multinomial logit model.
 
-estimate_wfh <- function(data) {
-	wfh_model <- mlogit(
-		formula = WRKLOC ~ 1 | LIF_CYC_cat + HHVEHCNT_cat + HHFAMINC_cat + R_SEX_IMP,
-		data = data,
-		shape = "wide",
-		choice = "WRKLOC",
-		sep = ""
-	)
-	modelsummary(wfh_model)
-}
+# estimate_wfh <- function(data) {
+# 	wfh_model <- mlogit(
+# 		formula = WRKLOC ~ 1 | LIF_CYC_cat + HHVEHCNT_cat + HHFAMINC_cat + R_SEX_IMP,
+# 		data = data,
+# 		shape = "wide",
+# 		choice = "WRKLOC",
+# 		sep = ""
+# 	)
+# 	modelsummary(wfh_model)
+# }
