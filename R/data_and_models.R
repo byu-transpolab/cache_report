@@ -31,5 +31,3 @@ estimate_models <- function(car_mlogit){
   models
   
 }
-
-
