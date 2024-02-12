@@ -7,7 +7,6 @@ estimate_wfh <- function(nhts_per) {
 		filter(
 			as.integer(R_SEX) > 0,
 			as.integer(HHFAMINC_cat) > 0,
-			MSACAT == "03",
 			WORKER == "01"
 		) %>%
 		dfidx(choice = "WRKLOC", shape = "wide")

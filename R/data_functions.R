@@ -86,5 +86,8 @@ clean_nhts_hh_vars <- function(df){
 					"No children 0-5" = "3")
 			),
 			label = "Simplified Life Cycle classification for the household"
+		) %>% 
+		filter(
+			MSACAT == "03"
 		)
 }
