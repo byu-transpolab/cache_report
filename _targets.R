@@ -64,10 +64,10 @@ veho_targets <- tar_plan(
 # Work From Home ####
 wfh_targets <- tar_plan(
 	#WFH
-	wfh_model = estimate_wfh(haven::zap_labels(nhts$per)),
+	wfh_models = estimate_wfh(haven::zap_labels(nhts$per)),
 
 	# Telecommuting Frequency
-	tc_model = estimate_tc(haven::zap_labels(nhts$per))
+	tc_models = estimate_tc(haven::zap_labels(nhts$per))
 )
 
 

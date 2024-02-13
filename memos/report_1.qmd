@@ -11,6 +11,7 @@ library(tidyverse)
 library(targets)
 library(modelsummary)
 library(kableExtra)
+library(haven)
 ```
 
 This is Report 1, which has information about the data used in the model estimations as well as the estimations for the work from home model, the telecommuting frequency model, and the auto ownership mode.
@@ -29,9 +30,12 @@ The survey responses are labeled by region and MSA categorization.
 In this case, we chose to use all responses of people in MSAs with less than one million people, since this category closely lines up with Logan, UT.
 
 The household income was split into eleven different categories.
-This is what the income data looked like originally.
+@fig-orig shows what the income data looked like originally.
 
 ```{r, echo = FALSE}
+#| label: fig-orig
+#| tbl-cap: Original income distributions
+
 tar_load(nhts)
 
 ggplot(nhts$per, aes(x = HHFAMINC)) +
@@ -44,9 +48,12 @@ ggplot(nhts$per, aes(x = HHFAMINC)) +
 
 We grouped the income levels into smaller categories, so that instead of having eleven groups, there were four groups.
 The category breakdowns are from 1) less than \$10,000 to \$49,999, 2) from \$50,000 to \$99,999, 3) from \$100,000 to \$149,999, and 4) from \$150,000 and up.
-This is what the new distribution of income levels looked like.
+@fig-new shows the new distribution of income levels.
 
 ```{r echo = FALSE}
+#| label: fig-new
+#| tbl-cap: New income distributions (grouped)
+
 clean_income <- nhts$per %>% 
 	mutate(
 		HHFAMINC_cat = recode(
@@ -95,16 +102,21 @@ We also included the number of vehicles because the number of vehicles in a hous
 Income level was also included because the income of a person may affect their ability to have a home office and jobs in certain salary brackets may be more or less likely to have work from home options.
 The final variable we included was the sex of the respondent because sex may also play a role in work location choices.
 
-With these variables, we created a multinomial logit model because there are multiple categories of work locations.
+With these variables, we created several multinomial logit models because there are multiple categories of work locations (@tbl-wfh).
+The "life cycle" variable is not significant in any of these models.
+We will use Model 4 due to its exclusion of "life cycle" and its inclusion of all other variables, many of which are statistically significant.
 
 ```{r echo = FALSE}
-tar_load(wfh_model)
+#| label: tbl-wfh
+#| tbl-cap: Work-from-home model estimates
+
 modelsummary(
-		tar_read(wfh_model),
+		tar_read(wfh_models),
 		estimate = "{estimate} ({p.value}){stars}",
 		statistic = NULL,
 		gof_omit = "r2|Num"
-	)
+	) %>% 
+	kable_styling(latex_options = "scale_down")
 ```
 
 ## Telecommuting Frequency
@@ -121,10 +133,20 @@ We also included the number of vehicles because the number of vehicles in a hous
 Income level was also included because the income of a person may affect their ability to have a home office and jobs in certain salary brackets may be more or less likely to have work from home options.
 The final variable we included was the sex of the respondent because sex may also play a role in work location choices.
 
-With these variables, we created a multinomial logit model because the frequenciy at which individuals work from home may be different depending on these variables.
+With these variables, we created multinomial logit models because the frequency at which individuals work from home may be different depending on these variables (@tbl-tc).
+Unfortunately, even after much troubleshooting we are still getting a "computationally singular" error on many of these models, so only one is presented below.
+This model will be revisited, but for now we are using this model as it is the only one we could get to work.
 
-```{r}
+```{r echo = FALSE}
+#| label: tbl-tc
+#| tbl-cap: Telecommute frequency model estimates
 
+modelsummary(
+		tar_read(tc_models),
+		estimate = "{estimate} ({p.value}){stars}",
+		statistic = NULL,
+		gof_omit = "r2|Num"
+	)
 ```
 
 ## Auto Ownership
@@ -143,16 +165,29 @@ The final variable we included was the number of workers in a household because 
 We tried to analyze the difference between the number of vehicles and the number of adults as well as the difference between the number of vehicles and the number of workers.
 Since we are trying to predict the number of vehicles, it did not work to use these differences as a generic variable because the differences are highly correlated with the number of vehicles in each household.
 
-With these variables, we created a multinomial logit model because the number of vehicles for a given household may be different depending on these variables.
+With these variables, we created several multinomial logit models because the number of vehicles for a given household may be different depending on these variables (@tbl-veho).
+We will use Model 2 because it has many significant estimates and contains reasonable explanatory variables.
 
 ```{r echo = FALSE}
-tar_load(veho_models)
+#| label: tbl-veho
+#| tbl-cap: Vehicle ownership model estimates
+
 modelsummary(
 		tar_read(veho_models),
 		estimate = "{estimate} ({p.value}){stars}",
 		statistic = NULL,
 		gof_omit = "r2|Num"
-	)
+	) %>% 
+	kable_styling(latex_options = "scale_down")
 ```
 
 # Network
+
+The network is taken from the production CUBE model for Cache County.
+Currently, this network is in a bespoke format used in the CUBE model, and needs to be modified to work with AequilibraE.
+This involves converting the node and link tables from the existing networm to the GMNS specification.
+Some of this process is straightforward and has been completed, but we currently have no documentation on the CUBE model so some of the network data is unclear to us.
+We have reached out to both UDOT and Fehr & Peers about this and are waiting to hear back from them.
+
+Based on the experiences with the network and AequilibraE so far, this task is much more involved than previously thought.
+Working network assignment and accessibility calculation steps will therefore need to be postponed to a future report.

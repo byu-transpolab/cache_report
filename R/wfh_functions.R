@@ -22,6 +22,7 @@ estimate_wfh <- function(nhts_per) {
 		update(null_model, . ~ . -1 | LIF_CYC_cat + R_SEX),
 		update(null_model, . ~ . -1 | HHVEHCNT_cat + R_SEX),
 		update(null_model, . ~ . -1 | LIF_CYC_cat + HHVEHCNT_cat + R_SEX),
+		update(null_model, . ~ . -1 | HHFAMINC_cat + HHVEHCNT_cat + R_SEX),
 		update(null_model, . ~ . -1 | LIF_CYC_cat + HHFAMINC_cat + R_SEX),
 		update(null_model, . ~ . -1 | LIF_CYC_cat + HHVEHCNT_cat + HHFAMINC_cat + R_SEX)
 	)
