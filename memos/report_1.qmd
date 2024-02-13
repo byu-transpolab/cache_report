@@ -6,11 +6,23 @@ format: pdf
 ---
 
 ```{r}
+#| include: false
+library(tidyverse)
 library(targets)
 library(modelsummary)
+library(kableExtra)
 ```
 
 This is Report 1, which has info on: the network, auto ownership, and wfh/telecommute frequency.
+
+```{r}
+modelsummary(
+		tar_read(veho_models),
+		estimate = "{estimate} ({p.value}){stars}",
+		statistic = NULL,
+		gof_omit = "r2|Num"
+	)
+```
 
 # Data
 
