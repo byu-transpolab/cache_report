@@ -10,17 +10,21 @@ estimate_wfh <- function(nhts_per) {
 			WORKER == "01", 
 			!is.na(WRKLOC)
 		) %>%
-		
 		dfidx(choice = "WRKLOC", shape = "wide")
 		
-	model <- mlogit(
-		formula = WRKLOC ~ 0 |
-			LIF_CYC_cat + HHVEHCNT_cat + HHFAMINC_cat + R_SEX,
+	null_model <- mlogit(
+		formula = WRKLOC ~ 1,
 		data = format_per,
 		weights = format_per$WTPERFIN
 	)
 	
-	summary(model)
+	models <- list(
+		update(null_model, . ~ . -1 | LIF_CYC_cat + R_SEX),
+		update(null_model, . ~ . -1 | HHVEHCNT_cat + R_SEX),
+		update(null_model, . ~ . -1 | LIF_CYC_cat + HHVEHCNT_cat + R_SEX),
+		update(null_model, . ~ . -1 | LIF_CYC_cat + HHFAMINC_cat + R_SEX),
+		update(null_model, . ~ . -1 | LIF_CYC_cat + HHVEHCNT_cat + HHFAMINC_cat + R_SEX)
+	)
 
-	return(model)
+	return(models)
 }
