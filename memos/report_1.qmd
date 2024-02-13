@@ -5,4 +5,95 @@ metadata-files:
 format: pdf
 ---
 
+```{r}
+library(targets)
+library(modelsummary)
+```
+
 This is Report 1, which has info on: the network, auto ownership, and wfh/telecommute frequency.
+
+# Data
+
+We used data from both the National Household Travel Survey and the Utah Household Travel Survey in our analysis.
+
+## The National Household Travel Survey
+
+The National Household Travel Survey (NHTS) is a periodic survey conducted by the Federal Highways Administration (FHWA).
+It collects data on the travel behavior and patterns of households and individuals in the United States.
+Participants answer questions about how they travel, the modes of transportation they use, the reasons for their trips, and various demographic and socioeconomic factors that influence travel behavior including household size and income.
+The survey responses are labeled by region and MSA categorization.
+In this case, we chose to use all responses of people in MSAs with less than one million people, since this category closely lines up with Logan, UT.
+
+We grouped the income levels into smaller categories, so that instead of having eleven groups, there were four groups.
+The category breakdowns are from 1) less than \$10,000 to \$49,999, 2) from \$50,000 to \$99,999, 3) from \$100,000 to \$149,999, and 4) from \$150,000 and up.
+
+We also used the life cycle of the household which describes the demographic makeup of the household describing combinations of adults and children of different ages.
+We used three different categories: 1) one adult with children 0-5, 2) two or more adults with children 0-5 and 3) any other life cycle category.
+
+We categorized the number of vehicles by labeling any household that has three or more vehicles as just having three vehicles.
+
+## The Utah Household Travel Survey
+
+The Utah Household Travel Survey (UHTS) is similar to the NHTS, but it is specific to the state of Utah.
+This survey also gathers information about people's travel patterns as well as their demographic and socioeconomic information.
+They survey responses are labeled by county.
+In this case, we chose to use all responses of people located in Cache County, UT because Logan is located in Cache County.
+
+# Model Estimations
+
+We estimated coefficients for the work from home model, the telecommuting frequency model, and the auto ownership model.
+
+## Work From Home
+
+The work from home (WFH) model is designed to analyze and predict the likelihood or factors influencing the choice of individuals to work from home.
+
+We modeled the WFH model for Logan after the WFH model in the SEMCOG model.
+The SEMCOG model used variables such as worker status, gender, education level, household incomes, and age groups.
+
+In our model for Logan, UT, we included a variety of alternative specific variables.
+We included the life cycle of the household because individuals with young children may prefer to work from home.
+We also included the number of vehicles because the number of vehicles in a household may impact the ability of people in the household to commute which may impact the likelihood of working from home.
+Income level was also included because the income of a person may affect their ability to have a home office and jobs in certain salary brackets may be more or less likely to have work from home options.
+The final variable we included was the sex of the respondent because sex may also play a role in work location choices.
+
+```{r}
+#insert some descriptive statistics
+datasummary_balance()
+```
+
+With these variables, we created a multinomial logit model because there are multiple categories of work locations.
+
+```{r}
+tar_load(wfh_model)
+wfh_model
+```
+
+## Telecommuting Frequency
+
+The telecommuting frequency model is designed to analyze and predict how often an individual engages in telecommuting or remote work.
+Since the COVID-19 pandemic in 2020, there has been an increase in the adoption of remote work and more flexible work arrangements.
+
+We modeled the telecommuting frequency model for Logan after the telecommuting frequency model in SEMCOG.
+The SEMCOG model used variables such as the number of vehicles, the distance to work, income, worker status, gender, number of adults in the household, and the number of children in the household.
+
+In our model for Logan, UT we included a variety of alternative specific variables.
+We included the life cycle of the household because individuals with young children may prefer to work from home or may need to work from home to take care of young children.
+We also included the number of vehicles because the number of vehicles in a household may impact the ability of people in the household to commute which may impact the likelihood of working from home.
+Income level was also included because the income of a person may affect their ability to have a home office and jobs in certain salary brackets may be more or less likely to have work from home options.
+The final variable we included was the sex of the respondent because sex may also play a role in work location choices.
+
+```{r}
+#insert some descriptive statistics
+datasummary_balance()
+```
+
+With these variables, we created a multinomial logit model because there are the frequency at which individuals work from home may be different depending on these variables.
+
+```{r}
+tar_load(tc_model)
+tc_model
+```
+
+## Auto Ownership
+
+# Network
