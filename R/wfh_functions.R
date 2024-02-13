@@ -7,8 +7,10 @@ estimate_wfh <- function(nhts_per) {
 		filter(
 			as.integer(R_SEX) > 0,
 			as.integer(HHFAMINC_cat) > 0,
-			WORKER == "01"
+			WORKER == "01", 
+			!is.na(WRKLOC)
 		) %>%
+		
 		dfidx(choice = "WRKLOC", shape = "wide")
 		
 	model <- mlogit(
@@ -19,6 +21,6 @@ estimate_wfh <- function(nhts_per) {
 	)
 	
 	summary(model)
-	
+
 	return(model)
 }
