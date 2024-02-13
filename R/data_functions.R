@@ -12,12 +12,24 @@ clean_ut_hhts <- function(ut_trips, ut_hh, ut_taz) {
 	hh <- read_csv(ut_hh)
 	taz <- read_csv(ut_taz)
 	
-	
+	cleaned_hh <- hh %>%
+		mutate(
+			# hh_id = record_ID,
+			weight,
+			hh_adults_cat = pmin(hh_adults, 4),
+			workers_cat = workers4,
+			hh_income_cat,
+			num_vehicles_cat,
+			is_children = hh_children > 0,
+			hh_children = pmin(hh_children, 3),
+			.keep = "none",
+			.before = 1,
+		)
 	
 	return(
 		list(
 			# trips = cleaned_trips,
-			# hh = cleaned_hh,
+			hh = cleaned_hh
 			# taz = cleaned_taz
 		)
 	)

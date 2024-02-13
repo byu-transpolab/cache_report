@@ -5,7 +5,7 @@ library(tarchetypes)
 library(haven)
 
 tar_option_set(
-	packages = c("tidyverse", "wesanderson", "scales", "modelsummary", "mlogit", "broom", "labelled", "dfidx"),
+	packages = c("tidyverse", "wesanderson", "scales", "modelsummary", "mlogit", "broom", "labelled", "dfidx", "modelsummary"),
 	# memory = "transient",
 	# garbage_collection = TRUE,
 	# format = "qs",
@@ -57,6 +57,7 @@ veho_targets <- tar_plan(
 	# clean_veho = clean_veh_own(hhts_hh),
 	# veho_summary = veh_own_summary(clean_veho),
 	# veho_model = estimate_veho(clean_veho),
+	veho_models = estimate_veho(ut_hhts$hh)
 )
 
 
