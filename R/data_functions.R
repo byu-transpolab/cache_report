@@ -54,7 +54,12 @@ clean_nhts <- function(nhts_trips, nhts_hh, nhts_per, nhts_veh) {
 		clean_nhts_hh_vars()
 	
 	cleaned_per <- per %>% 
-		clean_nhts_hh_vars()
+		clean_nhts_hh_vars() %>% 
+		mutate(WRKLOC_cat = case_when(
+			WRKLOC == '03' ~ 1,
+			WRKLOC == '-1' ~ NA,
+			TRUE ~ 0
+		))
 	
 	return(
 		list(
