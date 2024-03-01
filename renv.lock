@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.2",
+    "Version": "4.3.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -1734,6 +1734,16 @@
         "cpp11"
       ],
       "Hash": "8548b44f79a35ba1791308b61e6012d7"
+    },
+    "tinytable": {
+      "Package": "tinytable",
+      "Version": "0.0.5",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "16cb77502d7ff23b064352def93006c8"
     },
     "tinytex": {
       "Package": "tinytex",

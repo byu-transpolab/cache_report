@@ -3,17 +3,17 @@
 #' @param nhts_per Persons table from NHTS
 #' @export
 estimate_wfh <- function(nhts_per) {
-	format_per <- nhts_per %>%
+	format_per <- nhts_per |>
 		filter(
 			as.integer(R_SEX) > 0,
 			as.integer(HHFAMINC_cat) > 0,
 			WORKER == "01", 
-			!is.na(WRKLOC)
-		) %>%
-		dfidx(choice = "WRKLOC", shape = "wide")
+			!is.na(WRKLOC_cat)
+		) |>
+		dfidx(choice = "WRKLOC_cat", shape = "wide")
 		
 	null_model <- mlogit(
-		formula = WRKLOC ~ 1,
+		formula = WRKLOC_cat ~ 1,
 		data = format_per,
 		weights = format_per$WTPERFIN
 	)

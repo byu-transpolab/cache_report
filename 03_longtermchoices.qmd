@@ -1,0 +1,112 @@
+# Long-term Choices
+
+```{r setup, file = "chapter_start.R", include = FALSE}
+# a number of commands need to run at the beginning of each chapter. This
+# includes loading libraries that I always use, as well as options for 
+# displaying numbers and text.
+```
+
+```{r setup2, include = FALSE}
+# Other packages ------
+# These are packages that get used in this chapter but aren't part of the default set.
+library(mlogit)
+library(tinytable)
+
+library(broom)
+
+## this can help us shape the 
+glance_custom.mlogit <- function(x) {
+	glance(x)
+}
+
+gm <- tibble::tribble(
+  ~raw,        ~clean,          ~fmt,
+  "nobs",      "N. Observations",  0,
+  "logLik",    "Log Likelihood", 1,
+  "rho2",        "McFadden Rho 2", 4,
+)
+
+rename_incomes <- function(old_names) {
+  new_names <- gsub("hh_income_cat", "", old_names)
+  setNames(new_names, old_names)
+}
+```
+
+## Vehicle ownership
+
+The vehicle ownership model predicts the number of vehicles owned by each
+household in the synthetic population. Many elements of travel behavior are
+dependent on the availability of vehicles, and this model should be sensitive to
+demographic variables as well as accessibility and density. @fig-veho shows a
+distribution of household vehicle ownership in the UHTS.
+
+```{r fig-veho}
+#| label: fig-veho
+#| fig-cap: Vehicle ownership by household in UHTS, using survey weights.
+hhts_hh <- tar_read(hhts_hh)
+ggplot(hhts_hh, aes(x = num_vehicles, weight = weight)) + 
+	geom_bar() + 
+	xlab("Number of vehicles") + ylab("Weighted households")
+```
+
+We modeled the auto ownership model for Logan after the auto ownership model in
+the SEMCOG model. The SEMCOG model used variables such as the number of drivers,
+the number of adults, the number of children, the income, the retail
+accessibility, and the auto time savings per worker to work.
+
+In our model for Logan, UT, we included a variety of alternative specific
+variables. We included the household income because the income of a household
+may affect the number of cars they can afford to have. We also included the
+number of adults because the number of adults, assuming that they are also
+drivers, may affect the number of vehicles that they have in their household.
+The number of workers was also included, for a similar reason to the number of
+adults. The final variable we included was the number of workers in a household
+because the number of workers in a household may affect how many vehicles the
+household has in order to accommodate the workers.
+
+We tried to analyze the difference between the number of vehicles and the number
+of adults as well as the difference between the number of vehicles and the
+number of workers. Since we are trying to predict the number of vehicles, it did
+not work to use these differences as a generic variable because the differences
+are highly correlated with the number of vehicles in each household.
+
+With these variables, we created several multinomial logit models because the
+number of vehicles for a given household may be different depending on these
+variables (@tbl-veho). We will use Model 2 because it has many significant
+estimates and contains reasonable explanatory variables.
+
+```{r tbl-veho echo = FALSE}
+#| label: tbl-veho
+#| tbl-cap: Vehicle ownership model estimates
+modelsummary(
+		tar_read(veho_models),
+		estimate = "{estimate} ({p.value}){stars}",
+		statistic = NULL,
+		gof_map = gm,
+		coef_rename = rename_incomes
+	) %>% 
+	kable_styling(latex_options = "scale_down")
+```
+
+## Workplace location choice
+
+## Work from home
+
+### Telecommute Frequency
+```{r tcmodels}
+tar_load(tc_models)
+```
+
+```{r tbl-tcmodels}
+#| label: tbl-tcmodels
+#| tbl-cap: Vehicle ownership model estimates
+modelsummary(
+		tc_models,
+		estimate = "{estimate} ({p.value}){stars}",
+		statistic = NULL,
+		gof_map = gm,
+		coef_rename = rename_incomes
+	) %>% 
+	kable_styling(latex_options = "scale_down")
+```
+

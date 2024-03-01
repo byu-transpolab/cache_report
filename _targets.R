@@ -23,11 +23,11 @@ misc_targets <- tar_plan(
 # Data ####
 data_targets <- tar_plan(
 	tar_file(utah_hhts_trips, "data/ut_hhts/ut_hhts_2012_trip_data.csv.gz"),
-	hhts_trips = read_csv(utah_hhts_trips),
+  tar_target(hhts_trips, read_csv(utah_hhts_trips)),
 	tar_file(utah_hhts_hh, "data/ut_hhts/ut_hhts_2012_hh_data.csv.gz"),
-	hhts_hh = read_csv(utah_hhts_hh),
+	tar_target(hhts_hh, read_csv(utah_hhts_hh)),
 	tar_file(utah_hhts_taz, "data/ut_hhts/ut_hhts_2012_taz_data.csv.gz"),
-	hhts_taz = read_csv(utah_hhts_taz),
+	tar_target(hhts_taz, read_csv(utah_hhts_taz)),
 	
 	ut_hhts = clean_ut_hhts(
 		ut_trips = utah_hhts_trips,

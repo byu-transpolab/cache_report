@@ -14,7 +14,3 @@ LaTeX: XeLaTeX
 
 AutoAppendNewline: Yes
 LineEndingConversion: Posix
-
-MarkdownWrap: Sentence
-MarkdownReferences: Block
-MarkdownCanonical: Yes
