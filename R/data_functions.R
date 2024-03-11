@@ -7,10 +7,10 @@
 #' @return A list containing tables of the cleaned survey data
 #'
 #'@export
-clean_ut_hhts <- function(ut_trips, ut_hh, ut_taz) {
-	trips <- read_csv(ut_trips)
-	hh <- read_csv(ut_hh)
-	taz <- read_csv(ut_taz)
+clean_ut_hhts <- function(trips, hh, taz) {
+	trips <- read_csv(trips)
+	hh <- read_csv(hh)
+	taz <- read_csv(taz)
 	
 	cleaned_hh <- hh %>%
 		mutate(
@@ -44,11 +44,11 @@ clean_ut_hhts <- function(ut_trips, ut_hh, ut_taz) {
 #' @return A list containing tables of the cleaned survey data
 #' 
 #' @export
-clean_nhts <- function(nhts_trips, nhts_hh, nhts_per, nhts_veh) {
-	trips <- read_sav(nhts_trips)
-	hh <- read_sav(nhts_hh)
-	per <- read_sav(nhts_per)
-	veh <- read_sav(nhts_veh)
+clean_nhts <- function(trips, hh, per, veh) {
+	trips <- read_sav(trips)
+	hh <- read_sav(hh)
+	per <- read_sav(per)
+	veh <- read_sav(veh)
 	
 	cleaned_hh <- hh %>% 
 		clean_nhts_hh_vars()

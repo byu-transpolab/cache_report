@@ -23,33 +23,26 @@ misc_targets <- tar_plan(
 # Data ####
 data_targets <- tar_plan(
 	tar_file(utah_hhts_trips, "data/ut_hhts/ut_hhts_2012_trip_data.csv.gz"),
-	hhts_trips = read_csv(utah_hhts_trips),
 	tar_file(utah_hhts_hh, "data/ut_hhts/ut_hhts_2012_hh_data.csv.gz"),
-	hhts_hh = read_csv(utah_hhts_hh),
 	tar_file(utah_hhts_taz, "data/ut_hhts/ut_hhts_2012_taz_data.csv.gz"),
-	hhts_taz = read_csv(utah_hhts_taz),
 	
 	ut_hhts = clean_ut_hhts(
-		ut_trips = utah_hhts_trips,
-		ut_hh = utah_hhts_hh,
-		ut_taz = utah_hhts_taz
-	),
-	
-	nhts = clean_nhts(
-		nhts_trips = nhts_trippub,
-		nhts_hh = nhts_hhpub,
-		nhts_per = nhts_perpub,
-		nhts_veh = nhts_vehpub
+		trips = utah_hhts_trips,
+		hh = utah_hhts_hh,
+		taz = utah_hhts_taz
 	),
 	
 	tar_file(nhts_hhpub, "data/nhts/HHPUB.sav.gz"),
-	nhts_hh = read_sav(nhts_hhpub),
 	tar_file(nhts_perpub, "data/nhts/PERPUB.sav.gz"),
-	nhts_per = read_sav(nhts_perpub),
 	tar_file(nhts_trippub, "data/nhts/TRIPPUB.sav.gz"),
-	nhts_trip = read_sav(nhts_trippub),
 	tar_file(nhts_vehpub, "data/nhts/VEHPUB.sav.gz"),
-	nhts_veh = read_sav(nhts_vehpub),
+	
+	nhts = clean_nhts(
+		trips = nhts_trippub,
+		hh = nhts_hhpub,
+		per = nhts_perpub,
+		veh = nhts_vehpub
+	),
 )
 
 # Vehicle ownership ####
