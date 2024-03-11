@@ -17,14 +17,14 @@ estimate_tc <- function(nhts_per) {
 			),
 			female = ifelse(R_SEX == "02", TRUE, F),
 			children = factor(children, levels = c("No children under 5", 
-												"Children less than 5")),
+																						 "Children less than 5")),
 			tc_frequency = case_when(
 				WKFMHM22 == "01" ~ "Never", 
 				WKFMHM22 %in% c("02") ~ "One or two days", 
 				WKFMHM22 %in% c("03") ~ "Three or four days",
 				WKFMHM22 %in% c("04") ~ "Five or more days",
 				
-		)) |> 
+			)) |> 
 		select(HOUSEID, PERSONID, WTPERFIN, children, tc_frequency, female, HHVEHCNT_cat, HHFAMINC_cat) |> 
 		dfidx(choice = "tc_frequency", shape = "wide")
 	
@@ -43,6 +43,7 @@ estimate_tc <- function(nhts_per) {
 		# update(null_model, . ~ . -1 | LIF_CYC_cat + HHVEHCNT_cat + HHFAMINC_cat + R_SEX)
 	)
 	
-
+	
 	return(models)
 }
+
