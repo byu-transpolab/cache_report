@@ -5,18 +5,13 @@ metadata-files:
 format: pdf
 ---
 
-```{r}
-#| include: false
-library(tidyverse)
-library(targets)
-library(modelsummary)
-library(kableExtra)
-library(haven)
-```
+# Survey Cleaning
 
 We have started a "deep clean" of the travel surveys.
 Only minimal cleaning is required for many of the "long-term decision" ActivitySim models such as vehicle ownership and remote work status, and these models were estimated (preliminarily) previously.
 However, the daily and tour- and trip-level models will require further cleaning of the travel surveys to properly estimate.
+
+## Organizing into tours
 
 The first crucial step is to organize the survey trips into tours.
 The Utah Household Travel Survey is already organized into tours, but not in the same manner as is needed for ActivitySim.
@@ -25,64 +20,68 @@ However, the Survey additionally "breaks" tours at work locations, so an individ
 For example, @fig-short-day shows the DAP of an individual that travels from home to work, school, a store, and back home.
 In ActivitySim, this is considered a single tour, but the Survey counts this as two tours: a Home-Work tour and a Work-Home tour.
 
-![]()
+![Sample DAP with a work tour. The Survey counts this as two tours while ActivitySim considers this a single tour.](trip_tour_05.jpg){#fig-short-day}
 
 By contrast, @fig-home shows a DAP with several trips, but none are to work.
-Both ActivitySim and the survey count this as a single tour; the Survey classifies this DAP as a Home-Home tour.
+Both ActivitySim and the Survey count this sequence of trips as a single tour; the Survey classifies this as a Home-Home tour.
 
-![]()
+![Sample DAP with a non-work tour. Both the Survey and ActivitySim consider this a single tour.](trip_tour_02.jpg){#fig-home}
 
-This is Report 2 which provides an update on Logan, UT activity-based travel model.
+There is not much difficulty dealing with the Survey's Home-Work, Work-Home, and Home-Home tours.
+Home-Home tours have a one-to-one correspondence with tours in ActivitySim, and Home-Work and Work-Home tours can easily be joined into a work tour in ActivitySim.
+However, the Survey also includes "Work-Work" tours, where an individual begins and ends a sequence of trips at a work location.
+If this Work-Work tour is travel from one work location to another, then ActivitySim should consider the sequence of trips to be part of the same main work tour of the given individual.
+However, ActivitySim considers some of these Work-Work tours subtours, where a sequence of trips begins and ends at the *same* work location (such as going to lunch and returning to work).
 
-# Data Updates
+@fig-clients shows a complicated DAP.
+Nearly all trips are counted in the Survey as separate tours, as each client is considered a separate workplace location.
+ActivitySim would also consider each client a separate work location, so would not count any subtours in this DAP.
+Numbers 2 and 3 may *appear* to comprise a subtour, but since the client is a different work location, the trips are not considered a subtour.
+However, the Survey counts this DAP as having 10 (mostly Work-Work) tours due to the many work locations (clients), whereas ActivitySim would only count 2 (work) tours.
 
-## 
+![Sample DAP including several different work locations.](trip_tour_01.jpg){#fig-clients}
 
-Cleaned up the reading in of the ut_hhts and the nhts Replaced the estimate_tc function with the one from Dr. Macfarlane's branch
+@fig-bk shows a similarly complicated DAP, but there is a crucial difference.
+While at work, the individual leaves to Burger King and then returns to work.
+This is a subtour as defined in ActivitySim, and a (single) Work-Work tour as defined in the Survey.
 
-## 
+![Sample DAP including a subtour.](trip_tour_04.jpg){#fig-bk}
 
-Started to clean the nhts_trips to identify tours
+There is potential difficulty in discerning between Survey Work-Work tours that are an ActivitySim subtour and those that are not.
+We propose that Work-Work tours which begin and end in the same TAZ should be considered subtours, and Work-Work tours that begin and end in different TAZs should not.
+If the start and end TAZ of a Work-Work tour differ, we will consider the trips of said Work-Work tour to be a part of the main ActivitySim tour, and not a separate tour/subtour.
 
-The different trip purposes: HBW = home based work NHBW = non-home based work HBPb = ??
-HBO = home based other NHBNW = non-home based non-work HBSch = home based school HBShop = home based shop HBC = hoem based college?
+## Determining trip/tour modes/purposes
 
-```{r}
+After the Survey is organized into tours, we will need to determine the trip and tour modes and purposes.
+The trip modes/purposes will be quite easy to determine, as this information is already given in the Survey for each trip.
+However, we will likely need to recode these modes and purposes to match the parameters in the SEMCOG ActivitySim example.
+On the other hand, it may prove easier to adjust the parameters in ActivitySim to match the modes/purposes given in the Survey.
+Further exploration is required on this point.
 
-tar_load(ut_hhts)
+It will be more difficult to determine the purposes and modes for *tours*, however.
+The simplest approach may be to use a hierarchy of modes/purposes.
+For example, if transit is taken for any trip on the tour, it would be a transit tour, and if a workplace is visited it would be a work tour.
+This approach may be good enough, though there are some potential inconsistencies that would arise depending on exactly how the hierarchy is structured.
+This is likely the approach we will use for determining tour purpose, as the inconsistencies are expected to be minor.
+They may be much more prominent for determining tour mode, however.
 
-unique(ut_hhts$trips$trip_pur_t)
+A different approach would be to determine the primary destination of the tour, and count the mode used to get there as the tour mode.
+This would be more difficult but may avoid some of the inconsistencies of the first method.
+There may also be additional methods we have not yet considered that would be even better.
+We would like input on this.
 
-ut_hhts$trips <- ut_hhts$trips %>% 
-	filter(h_CO_NAME == "CACHE")
+# Network/Aequilibrae Updates
 
-ggplot(ut_hhts$trips, aes(x = trip_pur_t)) +
-  geom_bar(fill = "skyblue", color = "black") +
-  labs(title = "Utah Household Travel Survey Trip Purposes",
-       x = "Trip Purpose",
-       y = "Frequency") +
-  theme_bw()
+We have successfully created a proof-of-concept scenario in Aequilibrae with the Cache County network.
+We are able to run network assignment and retrieve network skims with a randomly-generated trip table.
+Much work still remains, however.
 
+The network assignment is relatively straightforward, but it requires that the cost/impedance term matches the expression used in ActivitySim's mode and destination choice models.
+This may be some function of travel time, distance, and monetary cost, potentially including other parameters as well.
+We have not yet looked into the ActivitySim models to determine how best to adjust the assignment algorithm.
 
-# origin
-# production
-# destination
-# home
-# attraction
-# work
-
-```
-
-```{r}
-ut_hhts$trips <- ut_hhts$trips %>% 
-	filter(h_CO_NAME == "CACHE")
-
-unique(ut_hhts$trips$mode_t)
-
-ggplot(ut_hhts$trips, aes(x = mode_t)) +
-  geom_bar(fill = "skyblue", color = "black") +
-  labs(title = "Utah Household Travel Survey Trip Modes",
-       x = "Modes",
-       y = "Frequency") +
-  theme_bw()
-```
+Additionally, the skims retrieved from the network should make sure that the travel time, distance, and other parameters used are consistent.
+That is, a route between TAZs should have a travel time equal to the travel distance times the travel speed for each link.
+The shortest-time route between two TAZs may differ substantially from the shortest-distance route, so this will require some work to ensure the skims are consistent.
+We are taking the travel time as the more important metric, and so will base the distance and other skims off of the shortest-time path.
