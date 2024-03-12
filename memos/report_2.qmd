@@ -5,6 +5,10 @@ metadata-files:
 format: pdf
 ---
 
+This report details the current state of the project.
+We have looked more closely at the Household Travel Survey data and determined that further cleaning is required.
+Additionally, we have created a proof-of-concept project in Aequilibrae with the Cache County network.
+
 # Survey Cleaning
 
 We have started a "deep clean" of the travel surveys.
@@ -51,10 +55,10 @@ There is potential difficulty in discerning between Survey Work-Work tours that 
 We propose that Work-Work tours which begin and end in the same TAZ should be considered subtours, and Work-Work tours that begin and end in different TAZs should not.
 If the start and end TAZ of a Work-Work tour differ, we will consider the trips of said Work-Work tour to be a part of the main ActivitySim tour, and not a separate tour/subtour.
 
-## Determining trip/tour modes/purposes
+## Determining trip and tour modes/purposes
 
 After the Survey is organized into tours, we will need to determine the trip and tour modes and purposes.
-The trip modes/purposes will be quite easy to determine, as this information is already given in the Survey for each trip.
+The trip modes and purposes will be quite easy to determine, as this information is already given in the Survey for each trip.
 However, we will likely need to recode these modes and purposes to match the parameters in the SEMCOG ActivitySim example.
 On the other hand, it may prove easier to adjust the parameters in ActivitySim to match the modes/purposes given in the Survey.
 Further exploration is required on this point.
