@@ -54,3 +54,17 @@ ggplot(ut_hhts$trips, aes(x = trip_pur_t)) +
 # work
 
 ```
+
+```{r}
+ut_hhts$trips <- ut_hhts$trips %>% 
+	filter(h_CO_NAME == "CACHE")
+
+unique(ut_hhts$trips$mode_t)
+
+ggplot(ut_hhts$trips, aes(x = mode_t)) +
+  geom_bar(fill = "skyblue", color = "black") +
+  labs(title = "Utah Household Travel Survey Trip Modes",
+       x = "Modes",
+       y = "Frequency") +
+  theme_bw()
+```
