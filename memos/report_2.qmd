@@ -1,0 +1,56 @@
+---
+title: "Report 2"
+metadata-files:
+  - _metadata.yml
+format: pdf
+---
+
+```{r echo = FALSE}
+#| include: false
+library(tidyverse)
+library(targets)
+library(modelsummary)
+library(kableExtra)
+library(haven)
+```
+
+This is Report 2 which provides an update on Logan, UT activity-based travel model.
+
+# Data Updates
+
+## 
+
+Cleaned up the reading in of the ut_hhts and the nhts Replaced the estimate_tc function with the one from Dr. Macfarlane's branch
+
+## 
+
+Started to clean the nhts_trips to identify tours
+
+The different trip purposes: HBW = home based work NHBW = non-home based work HBPb = ??
+HBO = home based other NHBNW = non-home based non-work HBSch = home based school HBShop = home based shop HBC = hoem based college?
+
+```{r, echo = FALSE}
+
+tar_load(ut_hhts)
+
+unique(ut_hhts$trips$trip_pur_t)
+
+ut_hhts$trips <- ut_hhts$trips %>% 
+	filter(h_CO_NAME == "CACHE")
+
+ggplot(ut_hhts$trips, aes(x = trip_pur_t)) +
+  geom_bar(fill = "skyblue", color = "black") +
+  labs(title = "Utah Household Travel Survey Trip Purposes",
+       x = "Trip Purpose",
+       y = "Frequency") +
+  theme_bw()
+
+
+# origin
+# production
+# destination
+# home
+# attraction
+# work
+
+```
