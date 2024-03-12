@@ -1,16 +1,35 @@
 #' Clean UT Household Travel Survey
 #' 
-#' @param ut_trips Trips file from UT HHTS
-#' @param ut_hh HH file from UT HHTS
-#' @param ut_taz TAZ file from UT HHTS
+#' @param trips Trips file from UT HHTS
+#' @param hh HH file from UT HHTS
+#' @param taz TAZ file from UT HHTS
 #' 
 #' @return A list containing tables of the cleaned survey data
 #'
-#'@export
+#' @export
 clean_ut_hhts <- function(trips, hh, taz) {
 	trips <- read_csv(trips)
 	hh <- read_csv(hh)
 	taz <- read_csv(taz)
+	
+	cleaned_trips <- trips %>% 
+		select(
+			hptripid,
+			tripID, 
+			hhmemberid, 
+			trip_pur_t, 
+			o_purp_t,
+			d_purp_t, 
+			oLoc,
+			dloc,
+			mode_t,
+			TourID,
+			TourStID,
+			TourEndID, 
+			TourType, 
+			PA_AP,
+			h_CO_NAME
+		)
 	
 	cleaned_hh <- hh %>%
 		mutate(
@@ -28,18 +47,19 @@ clean_ut_hhts <- function(trips, hh, taz) {
 	
 	return(
 		list(
-			# trips = cleaned_trips,
+			trips = cleaned_trips,
 			hh = cleaned_hh
 			# taz = cleaned_taz
 		)
 	)
 }
 
-#' Clean UT Household Travel Survey
+#' Clean the National Household Travel Survey
 #' 
-#' @param ut_trips Trips file from UT HHTS
-#' @param ut_hh HH file from UT HHTS
-#' @param ut_taz TAZ file from UT HHTS
+#' @param trips Trips file from NHTS
+#' @param hh HH file from NHTS
+#' @param per Per file from NHTS
+#' @param veh Veh file from NHTS
 #' 
 #' @return A list containing tables of the cleaned survey data
 #' 
