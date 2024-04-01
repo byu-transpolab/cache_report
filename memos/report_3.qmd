@@ -1,0 +1,85 @@
+---
+title: "Report 3"
+metadata-files:
+  - _metadata.yml
+format: pdf
+---
+
+```{r echo = FALSE}
+#| include: false
+library(tidyverse)
+library(targets)
+library(modelsummary)
+library(kableExtra)
+library(haven)
+```
+
+This report details the current state of the project.
+We discuss the progress made in cleaning the Utah Household Travel Survey tour data.
+
+# Survey Cleaning
+
+In the previous report, we discussed our efforts as we began cleaning the Utah Household Travel Survey (UT HHTS).
+The daily and tour- and trip-level models require further cleaning of the travel surveys to properly estimate.
+
+## ActivitySim Tour Conversion
+
+In the UT HHTS, each trip made by individuals is categorized.
+There are eight different trip purposes.
+These purposes are "HBC", "HBO", "HBPb", "HBShp", "HBW", "NHBNW", and "NHBW".
+A distribution of these trips types is shown.
+
+```{r}
+tar_load(ut_hhts)
+
+ggplot(ut_hhts$trips, aes(x = trip_pur_t)) +
+	geom_bar(fill = "skyblue", color = "black") +
+	labs(title = "UT HHTS Trip Purpose Frequency",
+			 x = "Trip Purpose",
+			 y = "Frequency") +
+	theme_minimal()
+```
+
+Tours are made up of trips; tours are defined differently in the UT HHTS than they need to be defined in ActivitySim.
+
+In the UT HHTS, there are five different tour types.
+These are "Home-Home", "Home-Work", "Work-Home", "Work-Work", and "Incomplete".
+The distribution of the tour types is shown.
+
+```{r}
+tar_load(ut_hhts)
+
+ggplot(ut_hhts$trips, aes(x = TourType)) +
+	geom_bar(fill = "skyblue", color = "black") +
+	labs(title = "UT HHTS Tour Type Frequency",
+			 x = "Tour Type",
+			 y = "Frequency") +
+	theme_minimal()
+```
+
+The "Home-Home" tours in the UT HHTS are tours that begin and end at home without any trips to work.
+These tours already correctly designated to be used in ActivitySim and will be designated as "home" tours in ActivitySim.
+
+The "Home-Work" and "Work-Home" trips need to be matched up to follow an individual from home to work and then from work back to home.
+ActivitySim treats this as one tour, whereas the UT HHTS treats this as two tours.
+Once these are matched up, they will be designed as "work" tours in ActivitySim.
+
+The "Work-Work" tours are where an individual begins and ends trips at a work location.
+If this "Work-Work" tour is travel from one work location to another, then ActivitySim should consider the sequence of trips to be part of the same main work tour of the given individual.
+However, ActivitySim considers some of these "Work-Work" tours subtours, where a sequence of trips begins and ends at the same work location (such as going to lunch and returning to work).
+
+In the UT HHTS, there are six different mode types.
+These are "auto", "bike", "school bus", "transit", "walk", and "other".
+The distribution of the mode types is shown.
+
+```{r}
+tar_load(ut_hhts)
+
+ggplot(ut_hhts$trips, aes(x = mode_t)) +
+	geom_bar(fill = "skyblue", color = "black") +
+	labs(title = "UT HHTS Tour Type Frequency",
+			 x = "Mode Type",
+			 y = "Frequency") +
+	theme_minimal()
+```
+
