@@ -83,7 +83,7 @@ cdap_targets <- tar_plan(
 
 # Tours ####
 tour_targets <- tar_plan(
-	
+	cleaned_tours = clean_tours(ut_hhts$trips)
 )
 
 # Trips ####
