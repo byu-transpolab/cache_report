@@ -1,6 +1,3 @@
-library(dplyr)
-library(tidyr)
-
 clean_tours <- function(tours) {
 	split_tours <- tours %>%
 		mutate(TourStart = if_else(TourType == "Incomplete", "Incomplete", str_split(TourType, "-", simplify = TRUE)[,1]),
@@ -15,7 +12,6 @@ clean_tours <- function(tours) {
 	return(split_tours)
 }
 
-result <- clean_tours(ut_hhts$trips)
 
 
 
