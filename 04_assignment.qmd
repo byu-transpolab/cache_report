@@ -1,1 +1,13 @@
+# Assignment and Validation
 
+## Other matrices
+
+The models described in the previous sections only cover internal passenger trips.
+We also need to consider
+
+-   Trips into, out of, and through the region.
+    These will generally be referred to as "external" trips.
+
+-   Commercial vehicle trips and freight.
+
+## Assignment

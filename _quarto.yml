@@ -18,11 +18,11 @@ book:
   date: "1/25/2023"
   chapters:
     - index.qmd
-    - 01_introduction.qmd
-    - 02_litreview.qmd
-    - 03_methods.qmd
-    - 04_results.qmd
-    - 05_conclusion.qmd
+    - 00_inputskims.qmd
+    - 01_population.qmd
+    - 02_tripbased.qmd
+    - 03_activitybased.qmd
+    - 04_assignment.qmd
     - references.qmd
   abstract: |
     This report describes calibration targets for travel models derived from both
