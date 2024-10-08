@@ -1,0 +1,11 @@
+# Population
+
+In this project, we construct a basic synthetic population for Cache Valley that we use in both implementations of the model.
+This prevents us from needing to construct a trip classification model in the trip-based population.
+This section also describes the vehicle ownership model that we develop for model frameworks.
+
+## Socioeconomic Data
+
+## Population Targets
+
+## Validation

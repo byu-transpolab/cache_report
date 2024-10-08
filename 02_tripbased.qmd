@@ -1,0 +1,13 @@
+# Trip-based Model
+
+In this section we develop calibration targets for a trip-based model.
+
+Overview of the model design
+
+## Trip Production Model
+
+## Mode Choice Logsums
+
+## Destination Choice
+
+## Time of Day
