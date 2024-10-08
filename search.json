@@ -1,0 +1,162 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Calibration Targets for Cache Valley, Utah",
+    "section": "",
+    "text": "Preface\nThis document describes the construction of trip- and activity- based calibration targets for Cache Valley, Utah derived from the 2012 Utah Household Travel Survey. Two sets of calibration targets are developed from the same input survey:\n\nA trip-based model\nActivitySim",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "00_inputskims.html",
+    "href": "00_inputskims.html",
+    "title": "1  Input Skim Development",
+    "section": "",
+    "text": "We use networks coded in the GMNS framework and then input to Aequilibrae to measure skims between zones.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Input Skim Development</span>"
+    ]
+  },
+  {
+    "objectID": "01_population.html",
+    "href": "01_population.html",
+    "title": "2  Population",
+    "section": "",
+    "text": "2.1 Socioeconomic Data",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Population</span>"
+    ]
+  },
+  {
+    "objectID": "01_population.html#population-targets",
+    "href": "01_population.html#population-targets",
+    "title": "2  Population",
+    "section": "2.2 Population Targets",
+    "text": "2.2 Population Targets",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Population</span>"
+    ]
+  },
+  {
+    "objectID": "01_population.html#validation",
+    "href": "01_population.html#validation",
+    "title": "2  Population",
+    "section": "2.3 Validation",
+    "text": "2.3 Validation",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Population</span>"
+    ]
+  },
+  {
+    "objectID": "02_tripbased.html",
+    "href": "02_tripbased.html",
+    "title": "3  Trip-based Model",
+    "section": "",
+    "text": "3.1 Trip Production Model",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Trip-based Model</span>"
+    ]
+  },
+  {
+    "objectID": "02_tripbased.html#mode-choice-logsums",
+    "href": "02_tripbased.html#mode-choice-logsums",
+    "title": "3  Trip-based Model",
+    "section": "3.2 Mode Choice Logsums",
+    "text": "3.2 Mode Choice Logsums",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Trip-based Model</span>"
+    ]
+  },
+  {
+    "objectID": "02_tripbased.html#destination-choice",
+    "href": "02_tripbased.html#destination-choice",
+    "title": "3  Trip-based Model",
+    "section": "3.3 Destination Choice",
+    "text": "3.3 Destination Choice",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Trip-based Model</span>"
+    ]
+  },
+  {
+    "objectID": "02_tripbased.html#time-of-day",
+    "href": "02_tripbased.html#time-of-day",
+    "title": "3  Trip-based Model",
+    "section": "3.4 Time of Day",
+    "text": "3.4 Time of Day",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Trip-based Model</span>"
+    ]
+  },
+  {
+    "objectID": "03_activitybased.html",
+    "href": "03_activitybased.html",
+    "title": "4  Activity-based Model (ActivitySim)",
+    "section": "",
+    "text": "4.1 Mandatory Location Choice",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Activity-based Model (ActivitySim)</span>"
+    ]
+  },
+  {
+    "objectID": "03_activitybased.html#daily-activity-pattern",
+    "href": "03_activitybased.html#daily-activity-pattern",
+    "title": "4  Activity-based Model (ActivitySim)",
+    "section": "4.2 Daily Activity Pattern",
+    "text": "4.2 Daily Activity Pattern",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Activity-based Model (ActivitySim)</span>"
+    ]
+  },
+  {
+    "objectID": "03_activitybased.html#mandatory-tour-frequency",
+    "href": "03_activitybased.html#mandatory-tour-frequency",
+    "title": "4  Activity-based Model (ActivitySim)",
+    "section": "4.3 Mandatory Tour Frequency",
+    "text": "4.3 Mandatory Tour Frequency",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Activity-based Model (ActivitySim)</span>"
+    ]
+  },
+  {
+    "objectID": "03_activitybased.html#other-models",
+    "href": "03_activitybased.html#other-models",
+    "title": "4  Activity-based Model (ActivitySim)",
+    "section": "4.4 Other Models",
+    "text": "4.4 Other Models",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Activity-based Model (ActivitySim)</span>"
+    ]
+  },
+  {
+    "objectID": "04_assignment.html",
+    "href": "04_assignment.html",
+    "title": "5  Assignment and Validation",
+    "section": "",
+    "text": "5.1 Other matrices\nThe models described in the previous sections only cover internal passenger trips. We also need to consider",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Assignment and Validation</span>"
+    ]
+  },
+  {
+    "objectID": "04_assignment.html#other-matrices",
+    "href": "04_assignment.html#other-matrices",
+    "title": "5  Assignment and Validation",
+    "section": "",
+    "text": "Trips into, out of, and through the region. These will generally be referred to as “external” trips.\nCommercial vehicle trips and freight.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Assignment and Validation</span>"
+    ]
+  },
+  {
+    "objectID": "04_assignment.html#assignment",
+    "href": "04_assignment.html#assignment",
+    "title": "5  Assignment and Validation",
+    "section": "5.2 Assignment",
+    "text": "5.2 Assignment",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Assignment and Validation</span>"
+    ]
+  }
+]
